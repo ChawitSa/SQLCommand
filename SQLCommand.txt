@@ -1,0 +1,112 @@
+--อธิบาย Data & Database ว่าคืออะไร--
+ข้อมูล: ข้อเท็จจริงหรือเรื่องราวต่าง ๆ เมื่อข้อมูลผ่านการประมวลผล (Process) จะได้เป็นสารสนเทศ (Information)
+วิวัฒนาการของฐานข้อมูล:
+	First-generation: Hierarchical and Network Database
+	Second-generation: Relational Database
+	Third-generation: Object-Relational Database and Object-Oriented Database
+องค์ประกอบ Database Management System:
+	Software: เป็นโปรแกรม ทำหน้าที่สร้าง/เรียกใช้/ปรับเปลี่ยนข้อมูล
+	Hardware: อุปกรณ์อำนวยความสะดวกให้ Software มีประสิทธิภาพ
+	Data: ข้อมูล
+	Peopleware: End-User, Operator, System Analyst, Programmer, Database Administrator
+DBMS:
+	ข้อดี: 	ลดความขัดแย้งของข้อมูล Inconsistency
+		สามารถใช้ร่วมกันได้ Sharing
+		ลดความซ้ำซ้อนของข้อมูล Redundancy
+		รักษาความถูกต้อง Correctness
+	ข้อเสีย:	ความซับซ้อน Complexity
+		ต้นทุน Cost
+		ผลกระทบสูงหากเกิดความผิดพลาด
+
+--Relational vs NoSQL Database--
+ลักษณะสำคัญ:
+	มีการระบุโครงสร้างฐานข้อมููล(Database Schema)	vs ไม่จำเป็นต้องระบุโครงสร้างฐานข้อมูล
+	ไม่สามารถเปลี่ยน Schema 			vs สามารถเปลี่ยน Schema
+	จัดเก็บข้อมูลในรูปแบบตาราง 			vs จัดเก็บข้อมูลหลายรูปแบบ เช่น key-value, graph
+	เชื่อมโยงหลายตารางได้ง่าย 			vs มีความซับซ้อนในการเชื่อมโยงข้อมูล
+
+ประเภทของฐานข้อมูลแบบ NoSQL: Key-Value model, Column Store, Document Database, or Graph Database
+การพิจารณาเลือกฐานข้อมูล:
+	RDBMS:	ACID (Atomic, Consistency, Isolation, & Durability)
+			Atomicity = All or None ทุก Transaction จะต้องสำเร็จทุกขั้นตอน
+			Consistency =  ความสอดคล้องกันของข้อมูล
+			Isolation = หากเกิด Transaction พร้อมกัน จะประมวลผลตามลำดับ
+			Durability = Transaction ที่ประมวลผลสำเร็จแล้ว จะสำเร็จตลอดไป
+		ข้อมูลมีโครงสร้าง และโครงสร้างไม่มีการเปลี่ยนแปลง หรือเปลี่ยนแปลงช้า
+	NoSQL:	ต้องการ CAP (Consistency, Availability, Partition Tolerance)
+		ข้อมูลไม่ค่อยมีโครงสร้าง หรือโครงสร้างมีการเปลี่ยนแปลงอย่างรวดเร็ว
+
+---ศัพท์สำคัญ Relational Database---
+ตาราง (Table)/ความสัมพันธ์(Relation): เป็นความสัมพันธ์ของข้อมูลในรูปแบบ 2 มิติ มีแถวและคอลัมน์
+Attribute/Field: คอลัมน์ของตาราง
+Tuple/Row/Record: แถวของตาราง
+Domain: ตัวกำหนดขอบเขตค่าของ attibute เช่น ตัวอักษรภาษาอังกฤษ จะทำให้ Domain เป็น A-Z เท่านั้น
+Degree: จำนวน Attribute(คอลัมน์) ของตาราง
+Cardinality: จำนวน Tuple(แถว) จองตาราง
+Primary Key: Key หลักของตาราง
+Candidate Key: Attribute ที่มีสิทธิ์ถูกเลือกเป็น Primary Key
+Composite Key: Key ที่ร่วมเป็น Primary Key
+Foreign Key: Attribute ที่มีค่าข้อมูลตรงกับ Primary Key ของตารางอื่น
+Null Value: ข้อมูลที่ไม่สามารถระบุค่าได้
+Relational Database: กลุ่มของตาราง
+
+---คุณสมบัติที่สำคัญใน Relational Database---
+	>Attribute ในตารางเดียวกันต้องไม่ซ้ำกัน
+	>แต่ละ Attribute ต้องเป็น Data Type เดียวกัน
+	>เรียง Attribute อย่างไรก็ได้
+	>ข้อมูลในแต่ละ Tuple ต้องไม่ซ้ำกัน
+	>แต่ละช่องในตารางสามารถเก็บได้เพียงค่าเดียว
+
+---Key ที่สำคัญใน Relational Database---
+Superkey: Attribute ที่มีข้อมูลในแต่ละ Tuple ต่างกัน
+Candidate Key: Superkey ที่จะถูกเลือกเป็น Primary Key
+Alternate Key: Candidate Key ที่ไม่ถูกเลือกเป็น Primary Key
+
+---ความถูกต้องและความสมบูรณ์ของข้อมูล---
+Null: เป็นช่องว่าง ซึ่งอาจเกิดจาก Data Missing
+Entity Integrity: Primary Key ไม่มีค่า Null
+Referential Integrity: Foreign Key ที่เป็น Primary Key
+
+---รู้จัก SQL เบื้องต้นและการดึงข้อมูล---
+Structured Query Language(SQL):
+	>เป็นภาษาเพื่อใช้จัดการกับฐานข้อมูลโดยเฉพาะ ซึ่งเป็นมาตรฐานของ Relational Database
+	>แบ่งได้ 2 ลักษณะ:	Data Manipulation Language (DML)
+			Data Definition Language (DDL)
+การเขียนคำสั่ง SQL:
+	>SQL ประกอบด้วย Reserved Words และ User-Defined Words
+	>Literals: ค่าคงที่ เช่น ตัวเลข String ฯลฯ
+	>คำสั่ง SELECT: ใช้ในการดึงข้อมูล
+		>>Select all: SELECT * FROM EMPLOYEE;
+		>>Distinct: SELECT DISTINCT Dno FROM EMPLOYEE;
+		>>Calculation: SELECT Salary*12 FROM EMPLOYEE;
+		>>ตั้งชื่อ Attribute: SELECT Salary as Income FROM EMPLOYEE;
+
+	>คำสั่ง WHERE: ใช้สร้างเงื่อนไข เช่น SELECT * FROM EMPLOYEE WHERE Salary > 40000;
+	>Logical Operators: AND, OR, NOT, IN, ORDER (ASC/DESC)
+		>>SELECT * FROM EMPLOYEE WHERE Dno = '4' OR Dno = '5';
+		>>SELECT * FROM EMPLOYEE WHERE Dno IN ('1', '2', '4', '7', '9');
+		>>SELECT * FROM EMPLOYEE ORDER by Salary DESC
+
+---วิธีใช้ SQL ในการจัดการฐานข้อมูล---
+Data Definition Language (DDL): ใช้ในการสร้าง, แก้ไข, และลบ
+คำสั่ง SQL DDL ที่สำคัญ:		CREATE SCHEMA (โครงสร้าง)
+			DROP SCHEMA
+			CREATE DOMAIN
+			DROP DOMAIN
+			CREATE TABLE [+ VARCHAR(15)/DECIMAL(6,2)/NOT NULL]
+			ALTER TABLE
+			DROP TABLE [+ 'RESTRICT', 'CASCADE']
+
+<--SQL Intermediate Command and Database Design-->
+---การรวมข้อมูล Aggregation---
+
+
+
+	
+
+
+
+
+
+
+
